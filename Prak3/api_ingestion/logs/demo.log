@@ -1,0 +1,4 @@
+2026-09-16 07:07:30,026 INFO root Pipeline started
+2026-09-16 07:07:30,026 INFO root Fetching page=1
+2026-09-16 07:07:30,026 WARNING root Rate limit reached
+2026-09-16 07:07:30,026 ERROR root Failed to save data

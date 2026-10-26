@@ -1,0 +1,38 @@
+2026-09-16 07:42:44,801 INFO pipeline Pipeline started
+2026-09-16 07:42:44,802 INFO pipeline Watermark loaded: 1970-01-01T00:00:00+00:00
+2026-09-16 07:42:44,802 INFO pagination Requesting page=1
+2026-09-16 07:42:44,828 INFO api_client HTTP 200 OK for http://127.0.0.1:8000/transactions (attempt 1)
+2026-09-16 07:42:44,828 INFO pagination Fetched page=1 records=10
+2026-09-16 07:42:44,828 INFO pipeline Records collected=10
+2026-09-16 07:42:44,828 INFO pagination Requesting page=2
+2026-09-16 07:42:44,843 INFO api_client HTTP 200 OK for http://127.0.0.1:8000/transactions (attempt 1)
+2026-09-16 07:42:44,844 INFO pagination Fetched page=2 records=10
+2026-09-16 07:42:44,844 INFO pipeline Records collected=20
+2026-09-16 07:42:44,844 INFO pagination Requesting page=3
+2026-09-16 07:42:44,873 INFO api_client HTTP 200 OK for http://127.0.0.1:8000/transactions (attempt 1)
+2026-09-16 07:42:44,873 INFO pagination Fetched page=3 records=10
+2026-09-16 07:42:44,873 INFO pipeline Records collected=30
+2026-09-16 07:42:44,874 INFO pagination Requesting page=4
+2026-09-16 07:42:44,887 INFO api_client HTTP 200 OK for http://127.0.0.1:8000/transactions (attempt 1)
+2026-09-16 07:42:44,888 INFO pagination Fetched page=4 records=10
+2026-09-16 07:42:44,888 INFO pipeline Records collected=40
+2026-09-16 07:42:44,888 INFO pagination Requesting page=5
+2026-09-16 07:42:44,902 INFO api_client HTTP 200 OK for http://127.0.0.1:8000/transactions (attempt 1)
+2026-09-16 07:42:44,903 INFO pagination Fetched page=5 records=10
+2026-09-16 07:42:44,903 INFO pipeline Records collected=50
+2026-09-16 07:42:44,903 INFO pagination Requesting page=6
+2026-09-16 07:42:44,918 INFO api_client HTTP 200 OK for http://127.0.0.1:8000/transactions (attempt 1)
+2026-09-16 07:42:44,919 INFO pagination Fetched page=6 records=10
+2026-09-16 07:42:44,919 INFO pipeline Records collected=60
+2026-09-16 07:42:44,919 INFO pagination Requesting page=7
+2026-09-16 07:42:44,933 INFO api_client HTTP 200 OK for http://127.0.0.1:8000/transactions (attempt 1)
+2026-09-16 07:42:44,933 INFO pagination Fetched page=7 records=0
+2026-09-16 07:42:44,964 INFO pipeline Parquet saved: data\transactions\transaction_date=2026-09-16\transactions.parquet
+2026-09-16 07:42:45,003 INFO pipeline Watermark updated: 2026-09-01T18:00:00+00:00
+2026-09-16 07:42:45,003 INFO pipeline Pipeline finished successfully
+2026-09-16 07:45:49,968 INFO pipeline Pipeline started
+2026-09-16 07:45:49,969 INFO pipeline Watermark loaded: 2026-09-01T18:00:00+00:00
+2026-09-16 07:45:49,969 INFO pagination Requesting page=1
+2026-09-16 07:45:49,975 INFO api_client HTTP 200 OK for http://127.0.0.1:8000/transactions (attempt 1)
+2026-09-16 07:45:49,975 INFO pagination Fetched page=1 records=0
+2026-09-16 07:45:49,975 INFO pipeline No new records
