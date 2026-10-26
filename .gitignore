@@ -1,6 +1,34 @@
+# Virtual environments
 .venv/
 **/.venv/
 venv/
+**/venv/
+
+# Python cache / build
 __pycache__/
 *.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment & secrets
 .env
+.env.*
+!.env.example
+
+# Databases & generated artifacts
+*.duckdb
+*.duckdb.wal
+*.db
+*.sqlite
+*.log
+target/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/

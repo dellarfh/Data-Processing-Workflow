@@ -1,1 +1,0 @@
-select customer_id, customer_name, segment, region from "analytics"."main"."stg_customers"
