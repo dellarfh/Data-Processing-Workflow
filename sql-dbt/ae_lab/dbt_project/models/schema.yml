@@ -1,0 +1,141 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Data mentah operasional perusahaan retail teknologi, dimuat apa adanya dari file CSV."
+    schema: raw
+    tables:
+      - name: customers
+        description: "Data customer mentah."
+      - name: products
+        description: "Data produk mentah beserta kategori dan department."
+      - name: orders
+        description: "Transaksi mentah pada level order line."
+      - name: payments
+        description: "Data pembayaran mentah."
+
+models:
+  - name: stg_orders
+    description: "Staging orders: rename dan casting ringan dari raw.orders (order_date menjadi DATE)."
+
+  - name: stg_customers
+    description: "Staging customers dari raw.customers."
+
+  - name: stg_products
+    description: "Staging products dari raw.products."
+
+  - name: int_sales
+    description: "Intermediate: logika bisnis perhitungan sales_amount (quantity x unit_price) per order line."
+
+  - name: dim_customer
+    description: "Dimension customer. Satu baris per customer, termasuk segment dan region."
+    columns:
+      - name: customer_id
+        description: "Primary key customer."
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_name
+        description: "Nama customer."
+      - name: segment
+        description: "Segmen customer."
+      - name: region
+        description: "Wilayah customer."
+
+  - name: dim_product
+    description: "Dimension product. Satu baris per produk, termasuk kategori dan department."
+    columns:
+      - name: product_id
+        description: "Primary key produk."
+        data_tests:
+          - unique
+          - not_null
+      - name: product_name
+        description: "Nama produk."
+      - name: category_id
+        description: "Kode kategori produk."
+      - name: category_name
+        description: "Nama kategori produk."
+      - name: department
+        description: "Department tempat kategori produk berada."
+      - name: unit_price
+        description: "Harga satuan produk."
+
+  - name: dim_date
+    description: "Dimension tanggal. Satu baris per tanggal order yang berbeda."
+    columns:
+      - name: full_date
+        description: "Primary key tanggal lengkap."
+        data_tests:
+          - unique
+          - not_null
+      - name: year
+        description: "Tahun."
+      - name: month
+        description: "Bulan (1-12)."
+      - name: quarter
+        description: "Kuartal (1-4)."
+
+  - name: fct_sales
+    description: "Fact table dengan grain satu baris per order line."
+    columns:
+      - name: order_id
+        description: "Primary key fact. Unik pada grain order line."
+        data_tests:
+          - unique
+          - not_null
+      - name: order_date
+        description: "Tanggal order."
+      - name: customer_id
+        description: "Foreign key ke dim_customer."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+      - name: product_id
+        description: "Foreign key ke dim_product."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+      - name: quantity
+        description: "Jumlah unit yang dipesan."
+      - name: unit_price
+        description: "Harga satuan saat transaksi."
+      - name: sales_amount
+        description: "Nilai penjualan transaksi."
+
+  - name: fct_sales_incremental
+    description: "Versi incremental dari fct_sales (unique_key order_id, watermark order_date)."
+    columns:
+      - name: order_id
+        description: "Primary key dan unique_key model incremental."
+        data_tests:
+          - unique
+          - not_null
+      - name: sales_amount
+        description: "Nilai penjualan transaksi."
+
+  - name: sales_mart
+    description: "Mart analitik: total penjualan per tahun, bulan, segment, region, dan kategori produk."
+    columns:
+      - name: year
+        description: "Tahun order."
+      - name: month
+        description: "Bulan order."
+      - name: segment
+        description: "Segmen customer."
+      - name: region
+        description: "Wilayah customer."
+      - name: category
+        description: "Kategori produk."
+      - name: total_sales
+        description: "Jumlah sales_amount pada kombinasi dimensi tersebut."
+      - name: total_quantity
+        description: "Jumlah quantity pada kombinasi dimensi tersebut."
+      - name: stg_payments
+        description: "Staging payments dari raw.payments."

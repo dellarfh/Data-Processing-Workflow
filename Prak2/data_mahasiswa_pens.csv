@@ -1,0 +1,9 @@
+id,nama,nik,umur,email,nilai_ipk,tanggal_daftar,status_pembayaran
+1,Budi Santoso,3578010101000001,20,budi@pens.ac.id,3.75,2026-01-10,Lunas
+2,Siti Aminah,3578010101000002,21,siti_at_pens.ac.id,3.5,2026-01-11,Lunas
+2,Siti Aminah,3578010101000002,21,siti_at_pens.ac.id,3.5,2026-01-11,Lunas
+3,Ahmad Rizki,3578010101000003,-5,ahmad@pens.ac.id,4.5,2026-01-12,Belum Lunas
+4,Dewi Lestari,3578010101000004,19,dewi@pens.ac.id,-1.0,2026-03-01,Lunas
+5,Eko Prasetyo,3578010101000005,22,eko@pens.ac.id,3.2,,Lunas
+6,Fany Noor,3578010101000006,20,fany@gmail.com,3.1,2024-05-01,Tidak Valid
+7,Gita Gutawa,3578010101000007,21,gita@pens.ac.id,3.8,2026-02-01,Lunas

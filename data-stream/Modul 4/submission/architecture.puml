@@ -1,0 +1,41 @@
+@startuml
+title Architecture - Payment Event Stream (key = order_id)
+left to right direction
+
+rectangle "Producer\n(app/producer.py)\nkey = order_id" as Producer
+
+queue "Topic: dpw3-events\n3 partitions" as Topic
+
+rectangle "Partition 0\nORD-01\nPAY-001 -> PAY-003 -> PAY-006" as P0
+rectangle "Partition 1\nORD-03\nPAY-004 -> PAY-007" as P1
+rectangle "Partition 2\nORD-02\nPAY-002 -> PAY-005 -> PAY-008" as P2
+
+rectangle "Consumer Group: dpw3-case\n(1 partition per consumer)" as Group {
+  rectangle "Consumer 1" as C1
+  rectangle "Consumer 2" as C2
+  rectangle "Consumer 3" as C3
+}
+
+rectangle "Processing\n(proses event, jeda 0.8 s)" as Proc
+database "Offset\n(commit manual setelah proses)" as Offset
+
+Producer --> Topic : publish event
+Topic --> P0
+Topic --> P1
+Topic --> P2
+P0 --> C1 : assigned
+P1 --> C2 : assigned
+P2 --> C3 : assigned
+C1 --> Proc
+C2 --> Proc
+C3 --> Proc
+Proc --> Offset : commit offset
+
+note bottom of Topic
+  Hash(order_id) menentukan partition:
+  satu order selalu ke partition yang sama,
+  sehingga urutan event per order terjaga.
+  Pembagian consumer ke partition di atas
+  hanyalah contoh (ditentukan Kafka).
+end note
+@enduml

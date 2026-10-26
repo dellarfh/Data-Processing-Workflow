@@ -1,0 +1,23 @@
+@startuml
+title Starter — Payment Event Flow
+
+actor Producer
+queue "dpw3-events" as Topic
+rectangle "Consumer Group" as Group
+rectangle "Consumer" as Consumer
+rectangle "Processing" as Process
+
+Producer --> Topic : event
+Topic --> Group : records
+Group --> Consumer : assigned partition
+Consumer --> Process : process
+Consumer --> Topic : commit offset
+
+note right of Topic
+Architecture decisions:
+partition
+event key
+group
+consumer count
+end note
+@enduml

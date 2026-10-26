@@ -1,0 +1,6 @@
+{
+  "module": "Modul Praktikum 3 \u2014 Data Ingestion: Event-Driven & Streaming",
+  "artifact": "Bagian 4 \u2014 Tantangan Mandiri / Case Study",
+  "case": "Payment Event Stream",
+  "principle": "one case, one architecture decision, one failure, three evidence"
+}

@@ -1,0 +1,60 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: customers
+      - name: products
+      - name: orders
+      - name: payments
+
+models:
+  - name: dim_customer
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_product
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    columns:
+      - name: full_date
+        data_tests:
+          - unique
+          - not_null
+
+  - name: fct_sales
+    columns:
+      - name: order_id
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+
+  - name: fct_sales_incremental
+    columns:
+      - name: order_id
+        data_tests:
+          - unique
+          - not_null
